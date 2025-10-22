@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>神奇的帕帕抽獎</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <h1>神奇的帕帕抽獎</h1>
+      <p>一群蛋在場地內互相碰撞、扣血，最後存活者即為抽獎得主</p>
+    </header>
+
+    <main class="layout">
+      <aside class="controls" aria-label="抽獎設定">
+        <section class="panel">
+          <h2>參與者</h2>
+          <textarea id="participantsInput" placeholder="每行一位參與者名稱換行若留空則使用預設數量的(無名蛋)" rows="8"></textarea>
+        </section>
+
+        <section class="panel">
+          <h2>參數設定</h2>
+          <label class="field">
+            <span>初始血量（HP）</span>
+            <input id="initialHp" type="number" min="10" step="10" value="100" />
+          </label>
+          <label class="field">
+            <span>每次碰撞扣血</span>
+            <input id="damagePerHit" type="number" min="1" step="1" value="10" />
+          </label>
+          <label class="field">
+            <span>蛋數量（無名蛋時使用）</span>
+            <input id="eggsCount" type="number" min="2" step="1" value="0" />
+          </label>
+          <label class="field">
+            <span>速度倍率</span>
+            <input id="speedMultiplier" type="range" min="0.5" max="3" step="0.1" value="1.2" />
+          </label>
+          <div class="actions">
+            <button id="startBtn">開始抽獎</button>
+            <button id="resetBtn" class="secondary">重置</button>
+          </div>
+        </section>
+      </aside>
+
+      <section class="arena">
+        <canvas id="arenaCanvas" width="960" height="600" aria-label="碰撞場地"></canvas>
+        <div id="winnerOverlay" class="winner-overlay" hidden>
+          <div class="winner-card">
+            <h3>抽獎得主</h3>
+            <p id="winnerName">—</p>
+            <button id="playAgainBtn">再來一次</button>
+          </div>
+        </div>
+      </section>
+
+      <aside class="scoreboard" aria-label="血量列表">
+        <h2>血量列表</h2>
+        <ul id="scoreboardList" class="score-list"></ul>
+      </aside>
+    </main>
+
+    <footer class="site-footer">
+      <small>為公平抽獎設計：每顆蛋隨機起始位置與速度，碰撞扣血直到只剩最後一名。</small>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
