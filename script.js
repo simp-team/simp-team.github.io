@@ -116,13 +116,13 @@
     return a.id < b.id ? `${a.id}-${b.id}` : `${b.id}-${a.id}`;
   }
 
-  function applyCollision(a, b, now, damage) {
+  function applyCollision(a, b, now, damageA, damageB) {
     const key = pairKey(a, b);
     const last = lastHitMap.get(key) || 0;
     if (now - last < hitCooldownMs) return;
 
-    a.hp = Math.max(0, a.hp - damage);
-    b.hp = Math.max(0, b.hp - damage);
+    a.hp = Math.max(0, a.hp - damageA);
+    b.hp = Math.max(0, b.hp - damageB);
     lastHitMap.set(key, now);
 
     const nx = a.x - b.x;
@@ -173,8 +173,9 @@
         const dy = a.y - b.y;
         const dist = Math.hypot(dx, dy);
         if (dist < a.r + b.r) {
-          const damage = Math.floor(Math.random() * (maxDamage - minDamage + 1)) + minDamage;
-          applyCollision(a, b, now, damage);
+          const damageA = Math.floor(Math.random() * (maxDamage - minDamage + 1)) + minDamage;
+          const damageB = Math.floor(Math.random() * (maxDamage - minDamage + 1)) + minDamage;
+          applyCollision(a, b, now, damageA, damageB);
         }
       }
     }
