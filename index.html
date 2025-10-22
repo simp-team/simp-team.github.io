@@ -26,8 +26,12 @@
             <input id="initialHp" type="number" min="10" step="10" value="100" />
           </label>
           <label class="field">
-            <span>每次碰撞扣血</span>
-            <input id="damagePerHit" type="number" min="1" step="1" value="10" />
+            <span>每次碰撞扣血（最小值）</span>
+            <input id="damageMin" type="number" min="1" step="1" value="5" />
+          </label>
+          <label class="field">
+            <span>每次碰撞扣血（最大值）</span>
+            <input id="damageMax" type="number" min="1" step="1" value="15" />
           </label>
           <label class="field">
             <span>蛋數量（無名蛋時使用）</span>
@@ -35,7 +39,7 @@
           </label>
           <label class="field">
             <span>速度倍率</span>
-            <input id="speedMultiplier" type="range" min="0.5" max="3" step="0.1" value="1.2" />
+            <input id="speedMultiplier" type="range" min="0.5" max="5" step="0.1" value="1.2" />
           </label>
           <div class="actions">
             <button id="startBtn">開始抽獎</button>

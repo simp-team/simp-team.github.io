@@ -4,7 +4,8 @@
 
   const participantsInput = document.getElementById('participantsInput');
   const initialHpInput = document.getElementById('initialHp');
-  const damagePerHitInput = document.getElementById('damagePerHit');
+  const damageMinInput = document.getElementById('damageMin');
+  const damageMaxInput = document.getElementById('damageMax');
   const eggsCountInput = document.getElementById('eggsCount');
   const speedMultiplierInput = document.getElementById('speedMultiplier');
 
@@ -159,7 +160,9 @@
       if (e.y + e.r > h) { e.y = h - e.r; e.vy *= -1; }
     }
 
-    const damage = Math.max(1, Number(damagePerHitInput.value || 10));
+    const minDamage = Math.max(1, Number(damageMinInput.value || 5));
+    const maxDamage = Math.max(minDamage, Number(damageMaxInput.value || 15));
+
     for (let i = 0; i < eggs.length; i++) {
       const a = eggs[i];
       if (!a.alive) continue;
@@ -170,6 +173,7 @@
         const dy = a.y - b.y;
         const dist = Math.hypot(dx, dy);
         if (dist < a.r + b.r) {
+          const damage = Math.floor(Math.random() * (maxDamage - minDamage + 1)) + minDamage;
           applyCollision(a, b, now, damage);
         }
       }
